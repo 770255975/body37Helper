@@ -19,16 +19,16 @@ public class HelperInit implements IXposedHookLoadPackage {
 	private static final String PACKAGE_NAME = "com.body37.light";
 	@Override
 	public void handleLoadPackage(final LoadPackageParam lpparam) throws Throwable {
-		//判断包名，确定hook应用
+		//鍒ゆ柇鍖呭悕锛岀‘瀹歨ook搴旂敤
 		if(!PACKAGE_NAME.contains(lpparam.packageName)){
 			return;
 		}else{
-			//获取Context对象
+			//鑾峰彇Context瀵硅薄
 			Object activityThread = callStaticMethod(findClass("android.app.ActivityThread", null), "currentActivityThread");
 			Context mContext = (Context)callMethod(activityThread, "getSystemContext");
-			//打印xposed log
+			//鎵撳嵃xposed log
 			XposedBridge.log(lpparam.packageName+":"+lpparam.appInfo.targetSdkVersion);
-			//测试hookMethod
+			//娴嬭瘯hookMethod
 			findAndHookConstructor("com.body37.light.activity.set.SocialNetworkActivity", lpparam.classLoader, new XC_MethodHook() {
 
 				@Override
@@ -61,7 +61,7 @@ public class HelperInit implements IXposedHookLoadPackage {
 			
 			
 			/**
-			 * 修改qq运动步数
+			 * 淇敼qq杩愬姩姝ユ暟
 			 */
 			findAndHookConstructor("body37light.qa.a", lpparam.classLoader, android.content.Context.class,java.lang.String.class,java.util.ArrayList.class,new XC_MethodHook(){
 
@@ -84,7 +84,7 @@ public class HelperInit implements IXposedHookLoadPackage {
 			
 			
 			/**
-			 * 修改微信步数
+			 * 淇敼寰俊姝ユ暟
 			 */
 			findAndHookMethod("body37light.qh", lpparam.classLoader, "b" ,android.content.Context.class ,new XC_MethodHook(){
 
@@ -120,7 +120,7 @@ public class HelperInit implements IXposedHookLoadPackage {
 				protected void afterHookedMethod(MethodHookParam param)
 						throws Throwable {
 					XposedBridge.log("after nikiname");
-					param.setResult("李想");
+					param.setResult("binghx");
 				}
 				
 			});
